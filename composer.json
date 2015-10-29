@@ -1,0 +1,15 @@
+{
+    "name": "homepc/comptest",
+    "license": "gplv3",
+    "authors": [
+        {
+            "name": "Yuri Yagupov",
+            "email": "project@idefclub.ru"
+        }
+    ],
+    "require": {
+        "twig/twig": "1.*",
+        "corneltek/pux": "~1.5",
+        "nicmart/tree": "0.2.*"
+    }
+}
