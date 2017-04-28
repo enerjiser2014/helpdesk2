@@ -2,6 +2,14 @@
 
 
 namespace App\Controllers;
+use App\Classes\Conf;
+use App\Classes\Helper;
+use App\Models\Users\FLModel;
+use App\Models\Users\Validators\FLValidator;
+use App\Models\Users\ULModel;
+use App\Models\Users\Validators\ULValidator;
+use App\Classes\Context;
+
 define(VK_CODE_LENGTH, 18);
 
 class Login
@@ -13,26 +21,43 @@ class Login
     public function __construct()
     {
         $this->vk = include __DIR__ . './../config/vk_conf.php';
-        $this->vkUrlAuth = $url = 'https://oauth.vk.com/authorize';
-        $this->vkUrlAccessToken = $url = 'https://oauth.vk.com/access_token';
+        $this->vkUrlAuth = $url = 'https://oauth.Vk.com/authorize';
+        $this->vkUrlAccessToken = $url = 'https://oauth.Vk.com/access_token';
     }
 
     public function startPoint()
     {
+        $user1 = new FLModel('fl');
+        $user2 = new ULModel('ul');
+
+        $work1 = new Context(new FLValidator());
+        $work1->ifValid($user1);
+        $work2 = new Context(new ULValidator());
+        $work2->ifValid($user1);
+        exit;
         $this->vk['response_type'] = 'code';
         $vkLink = '<p><a href="' . $this->vkUrlAuth . '?' . urldecode(http_build_query($this->vk)) . '">Аутентификация через ВКонтакте</a></p>';
         echo $vkLink;
+        $fileList = glob('Plugins/*');
+        $plugins = [];
+        foreach ($fileList as $fileName) {
+            $str = 'App\\Plugins\\Vk\\VkPlugin';
+            new $str;
+            //$plugins[$fileName] = new 'App\Plugins\\' . $fileName . '\\' . $fileName . Plugin;
+        }
+        var_dump($fileList);
         var_dump($this->vk);
     }
 
     public function vkAuth()
     {
+        $params = [];
         $this->vk['code'] = strlen($_GET['code']) === VK_CODE_LENGTH ? $_GET['code'] : null;
         $l = $this->vkUrlAccessToken . '?' . urldecode(http_build_query($this->vk));
-        $token = json_decode($this->curl($l));
+        $token = json_decode(Helper::curl($l));
 
         if ($token->error != NULL) {
-            header('Location: ' . 'http://testtask/Login');
+            Helper::redirect('http://' . Conf::Site('hostname') . '/Login');
         }
 
         if ($token->access_token != NULL) {
@@ -42,7 +67,7 @@ class Login
                 'access_token' => $token->access_token,
             ];
         }
-        $userInfo = json_decode(file_get_contents('https://api.vk.com/method/users.get' . '?' . urldecode(http_build_query($params))), true);
+        $userInfo = json_decode(Helper::curl('https://api.Vk.com/method/users.get' . '?' . urldecode(http_build_query($params))),true);
         var_dump($userInfo);
     }
 
@@ -51,14 +76,4 @@ class Login
 
     }
 
-    private function curl($url)
-    {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        return $response;
-    }
 }

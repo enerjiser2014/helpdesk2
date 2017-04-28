@@ -1,6 +1,6 @@
 <?php
 
-define('debug_flug', 0);
+define('DEBUG_FLUG', 0);
 
 spl_autoload_register('myAutoload');
 
@@ -20,8 +20,7 @@ function myAutoload($classname)
         if ('App' == $classpart[0]) {
             unset($classpart[0]);
             $load = __DIR__ . '/' . implode('/', $classpart) . '.php';
-
-            if (true == debug_flug) {
+            if (true == DEBUG_FLUG) {
                 echo $load . '<br>';
             }
 
