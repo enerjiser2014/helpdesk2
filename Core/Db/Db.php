@@ -1,5 +1,5 @@
 <?php
-namespace App\Db;
+namespace App\Core\Db;
 class Db
 {
     protected $dbh;

@@ -14,7 +14,7 @@ function myAutoload($classname)
         // Проверка авторизации ( в дальнейшем можно будет разрешить или
         //    запределить доступ к определенным классов)
         if ('Auth' != end($classpart)) {
-            App\Classes\Auth::checkAuth($classname);
+            App\Core\Auth::checkAuth($classname);
         }
 */
         if ('App' == $classpart[0]) {

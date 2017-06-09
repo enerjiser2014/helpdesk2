@@ -2,12 +2,12 @@
 
 namespace App\Models\Users\Validators;
 
-use App\Interfaces\IValidator;
+use App\Core\Interfaces\IValidator;
 
 class FLValidator implements IValidator
 {
     /**
-     * @param \App\Interfaces\stdClass|mixed $obj
+     * @param \App\Core\Interfaces\stdClass|mixed $obj
      * @return bool
      */
     public function isValid($obj)
@@ -16,7 +16,7 @@ class FLValidator implements IValidator
             return true;
         }
     }
-    public function getMessage()
+    public function getErrorMessage()
     {
         return 'FL';
     }

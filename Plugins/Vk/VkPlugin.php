@@ -2,9 +2,22 @@
 
 namespace App\Plugins\Vk;
 
-class VkPlugin {
-    public function __construct()
+use App\Core\Plugin;
+
+class VkPlugin extends Plugin
+{
+    public function install()
     {
-        echo 'This is Plugin(module) VkPlugin constructor<br>';
+
+    }
+
+    public function uninstall()
+    {
+
+    }
+
+    public function exec()
+    {
+        echo 'This is VkPlugin(module)<br>';
     }
 }

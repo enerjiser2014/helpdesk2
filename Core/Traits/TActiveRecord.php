@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Traits;
+namespace App\Core\Traits;
 
-use App\Db\Db as Db;
-use App\Classes\Conf as Conf;
+use App\Core\Db\Db as Db;
+use App\Core\Conf as Conf;
 
 trait TActiveRecord
 {

@@ -2,13 +2,14 @@
 
 
 namespace App\Controllers;
-use App\Classes\Conf;
-use App\Classes\Helper;
+use App\Core\Conf;
+use App\Core\ConfYml;
+use App\Core\Helper;
 use App\Models\Users\FLModel;
 use App\Models\Users\Validators\FLValidator;
 use App\Models\Users\ULModel;
 use App\Models\Users\Validators\ULValidator;
-use App\Classes\Context;
+use App\Core\ValidatorContext;
 
 define(VK_CODE_LENGTH, 18);
 
@@ -27,14 +28,18 @@ class Login
 
     public function startPoint()
     {
-        $user1 = new FLModel('fl');
-        $user2 = new ULModel('ul');
-
-        $work1 = new Context(new FLValidator());
-        $work1->ifValid($user1);
-        $work2 = new Context(new ULValidator());
-        $work2->ifValid($user1);
+//        $user1 = new FLModel('fl');
+//        $user2 = new ULModel('ul');
+//
+//        $work1 = new ValidatorContext(new FLValidator());
+//        $work1->ifValid($user1);
+//        $work2 = new ValidatorContext(new ULValidator());
+//        $work2->ifValid($user1);
+//        exit;
+        $conf = new ConfYml();
+        $conf->getConf('yml');
         exit;
+
         $this->vk['response_type'] = 'code';
         $vkLink = '<p><a href="' . $this->vkUrlAuth . '?' . urldecode(http_build_query($this->vk)) . '">Аутентификация через ВКонтакте</a></p>';
         echo $vkLink;

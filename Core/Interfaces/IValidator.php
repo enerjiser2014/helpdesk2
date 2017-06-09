@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Core\Interfaces;
 
 interface IValidator {
 
@@ -10,5 +10,5 @@ interface IValidator {
      * @return Boolean
      */
     function isValid($obj);
-    function getMessage();
+    function getErrorMessage();
 }

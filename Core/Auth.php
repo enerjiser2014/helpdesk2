@@ -6,13 +6,13 @@
  * Time: 13:44
  */
 
-namespace App\Classes;
+namespace App\Core;
 
 class Auth
 {
     static public function checkAuth()
     {
-        if ($_SESSION['Auth']==1) {
+        if ($_SESSION['Auth']===1) {
             return true;
         }
         else {

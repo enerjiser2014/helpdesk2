@@ -10,6 +10,7 @@
     "require": {
         "twig/twig": "1.*",
         "corneltek/pux": "~1.5",
-        "nicmart/tree": "0.2.*"
+        "nicmart/tree": "0.2.*",
+        "doctrine/orm": "^2.5"
     }
 }

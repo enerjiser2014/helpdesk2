@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Interfaces\IActiveRecord;
-use App\Traits\TMagicGetSet as TMagicGetSet;
-use App\Traits\TActiveRecord as TActiveRecord;
+use App\Core\Interfaces\IActiveRecord;
+use App\Core\Traits\TMagicGetSet as TMagicGetSet;
+use App\Core\Traits\TActiveRecord as TActiveRecord;
 
 abstract class Model implements IActiveRecord
 {
